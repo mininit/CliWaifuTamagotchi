@@ -87,8 +87,8 @@ func createUI(assets *Assets) *UI {
 // ==============================
 // ACTION SPACE SETUP
 // ==============================
-func setupActionSpace(ui *UI, assets *Assets, encourageLocked *bool, currentBody *string) {
-	ui.actionSpace.AddItem("Encourage", "  Get a nice message.", '1', func() {
+func setupActionSpace(ui *UI, assets *Assets, encourageLocked *bool, currentBody *string, keys utils.KeyBindings) {
+	ui.actionSpace.AddItem("Encourage", "  Get a nice message.", rune(keys.Encourage[0]), func() {
 		if !*encourageLocked {
 			*encourageLocked = true
 			utils.Encourage(ui.app, ui.waifuArt, ui.chatBox,
@@ -98,7 +98,7 @@ func setupActionSpace(ui *UI, assets *Assets, encourageLocked *bool, currentBody
 		}
 	})
 
-	ui.actionSpace.AddItem("Dress Up", "  Change her outfit.", '2', func() {
+	ui.actionSpace.AddItem("Dress Up", "  Change her outfit.", rune(keys.DressUp[0]), func() {
 		if !utils.LockGridChanges {
 			utils.DressUp(ui.app, ui.waifuArt, ui.chatBox,
 				assets.head, assets.headBlink,
@@ -106,22 +106,23 @@ func setupActionSpace(ui *UI, assets *Assets, encourageLocked *bool, currentBody
 		}
 	})
 
-	ui.actionSpace.AddItem("Background Mode", "  Remove odd TUI", 'b', func() {
+	ui.actionSpace.AddItem("Background Mode", "  Remove all odd TUI.", rune(keys.BackgroundMode[0]), func() {
 		utils.BackgroundMode(ui.app, ui.waifuArt, ui.chatBox, ui.happinessBar, ui.grid, ui.actionSpace, currentBody)
 	})
 
-	ui.actionSpace.AddItem("Quit", "  Exit the application.", 'q', func() {
+	ui.actionSpace.AddItem("Quit", "  Exit the application.", rune(keys.Quit[0]), func() {
 		ui.app.Stop()
 	})
 }
 
+
 // ==============================
 // GLOBAL KEYS
 // ==============================
-func setGlobalKeys(ui *UI, assets *Assets, encourageLocked *bool, currentBody *string, settings *utils.Settings) {
+func setGlobalKeys(ui *UI, assets *Assets, encourageLocked *bool, currentBody *string, keys utils.KeyBindings, isVimNavigation bool) {
 	ui.app.SetInputCapture(func(event *tcell.EventKey) *tcell.EventKey {
 		switch event.Rune() {
-		case '1':
+		case rune(keys.Encourage[0]):
 			if !*encourageLocked {
 				*encourageLocked = true
 				utils.Encourage(ui.app, ui.waifuArt, ui.chatBox,
@@ -130,23 +131,23 @@ func setGlobalKeys(ui *UI, assets *Assets, encourageLocked *bool, currentBody *s
 					func() { *encourageLocked = false })
 			}
 			return nil
-		case '2':
-			if utils.LockGridChanges == false {
+		case rune(keys.DressUp[0]):
+			if !utils.LockGridChanges {
 				utils.DressUp(ui.app, ui.waifuArt, ui.chatBox,
 					assets.head, assets.headBlink,
 					ui.grid, ui.actionSpace, currentBody)
 			}
 			return nil
-		case 'b':
+		case rune(keys.BackgroundMode[0]):
 			utils.BackgroundMode(ui.app, ui.waifuArt, ui.chatBox, ui.happinessBar, ui.grid, ui.actionSpace, currentBody)
 			return nil
-		case 'q':
+		case rune(keys.Quit[0]):
 			ui.app.Stop()
 			return nil
 		}
 
 		// Vim-like navigation works for any focused list
-		if settings.VimNavigation {
+		if isVimNavigation {
 			if focusedPrimitive := ui.app.GetFocus(); focusedPrimitive != nil {
 				// Check if the focused primitive is a list to enable vim navigation
 				if list, ok := focusedPrimitive.(*tview.List); ok {
@@ -245,8 +246,9 @@ func main() {
 
 	// ===== Set functions
 	// =====
-	setupActionSpace(ui, assets, &encourageLocked, &currentBody)
-	setGlobalKeys(ui, assets, &encourageLocked, &currentBody, settings)
+	setupActionSpace(ui, assets, &encourageLocked, &currentBody, settings.Keys)
+	setGlobalKeys(ui, assets, &encourageLocked, &currentBody, settings.Keys, settings.VimNavigation)
+
 
 	// ===== Auto processes
 	// =====

@@ -33,7 +33,7 @@ func Encourage(app *tview.Application, waifuArt, chatBox *tview.TextView,
 			UIEventsChan <- func() {
 				chatBox.SetText("Waifu: " + line)
 				waifuArt.SetText(happyHead + "\n" + body)
-				IncreaseHappiness(2)
+				IncreaseHappiness(6)
 			}
 		}
 
@@ -82,7 +82,7 @@ func DressUp(app *tview.Application, waifuArt, chatBox *tview.TextView,
 					*currentBody = item.Data
 					waifuArt.SetText(head + "\n" + *currentBody)
 					chatBox.SetText("Waifu changed into: " + item.Name)
-					IncreaseHappiness(1)
+					IncreaseHappiness(3)
 				}
 			}
 

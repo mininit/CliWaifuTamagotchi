@@ -33,8 +33,8 @@ CliWaifuTamagotchi is a **terminal-based tamagotchi** that:
 - Provides a small set of **interactions**: Encourage, Dress Up, Background Mode, Quit.
 - Uses a **persistent color palette** stored in `~/.config/cliwaifutamagotchi/palette.json`.
 - Uses **persistent detail settings** stored in `~/.config/cliwaifutamagotchi/settings.json`.
-- Minimal UI built using **`tview` and `tcell`**.
-- **Vim-style navigation**: Use `h`, `j`, `k`, `l` keys for intuitive navigation and selection (Must be enabled in setttings.json).
+- Has minimal UI built using **`tview` and `tcell`**.
+- Has **Vim-style navigation**: Use `h`, `j`, `k`, `l` keys for intuitive navigation and selection (Must be enabled in **settings.json**).
 
 No tons of loops - only one function that repeats itself every 5 seconds. Everything handles and updates according to it.
 
@@ -43,7 +43,7 @@ No tons of loops - only one function that repeats itself every 5 seconds. Everyt
 ## 🎬 Launching Process
 
 <details>
-  <summary>Brew</summary>
+  <summary>Brew (macOS)</summary>
 
   1. **Install**
 
@@ -62,7 +62,7 @@ No tons of loops - only one function that repeats itself every 5 seconds. Everyt
 </details>
 
 <details>
-  <summary>Git (Source code)</summary>
+  <summary>Git (Source code) (Linux)</summary>
 
   1. **Clone repository**
 
@@ -71,9 +71,10 @@ No tons of loops - only one function that repeats itself every 5 seconds. Everyt
   cd CliWaifuTamagotchi
   ```
 
-  2. **Run the app**
+  2. **Build app yourself, then run**
 
   ```bash
+  go build -o cliwt
   ./cliwt
   ```
 
@@ -108,17 +109,25 @@ JSON file's structure:
   "title": "#b4befe"
 }
 ```
-> Note: default palette is Catppuchin (Mocha)
+> Note: default palette is Catppuchin (Mocha).
 
 2. Settings<br>
 JSON file is in `~/.config/cliwaifutamagotchi/` ; Named `settings.json`<br>
 JSON file's structure:
 ```
 {
-  "name": "Waifu"
-  "defaultMessage": "..."
+  "name": "Waifu",
+  "defaultMessage": "...",
+  "vimNavigation": false,
+  "keys": {
+    "encourage": "l",
+    "dressup": "2",
+    "backgroundMode": "b",
+    "quit": "q"
+  }
 }
 ```
+> Note: try to avoid key overrides when using `"vimNavigation": true`.
 
 ---
 
@@ -134,7 +143,6 @@ CliWaifuTamagotchi/
 ├── reactions.jpg
 ├── go.mod
 ├── go.sum
-├── cliwt                               # Main file to execute the program
 ├── main.go                             # Main file that launches the project
 │
 └── utils/
@@ -191,7 +199,7 @@ CliWaifuTamagotchi/
 
 ### **utils/settings.go**
 
-* Loads settings from `~/.config/cliwaifutamagotchi/palette.json`.
+* Loads settings from `~/.config/cliwaifutamagotchi/settings.json`.
 * Creates **default settings** if missing.
 
 ---
@@ -203,8 +211,16 @@ CliWaifuTamagotchi/
     * More interactions (feeding, timed events, stats).
     * Save selected outfit and preferences.
     * Unit tests and error handling improvements.
-    * Packaging for release binaries.
+    * Husbando version ("Swap Mode").
+    * Maybe "Pose Mode" - loop animation or specific pose to select and have on the background.
+    * Maybe handle stderr so Waifu reacts to the errors you get during your work.
 
 ---
 
 ⤴︎ Return to the [📑 Table of Contents](#-table-of-contents) ⤴︎
+
+## Special thanks
+
+<a href="https://github.com/HenryLoM/CliWaifuTamagotchi/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=HenryLoM/CliWaifuTamagotchi" />
+</a>
