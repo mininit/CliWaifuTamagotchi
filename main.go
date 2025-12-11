@@ -98,14 +98,14 @@ func setupActionSpace(ui *UI, assets *Assets, encourageLocked *bool, currentBody
 		}
 	})
 
-	ui.actionSpace.AddItem("Gift", "  Give her a gift.", rune(keys.Gift[0]), func() {
+	ui.actionSpace.AddItem("Gift", "  Give a gift.", rune(keys.Gift[0]), func() {
 		if !utils.LockGridChanges {
 			utils.GiftMenu(ui.app, ui.grid, ui.actionSpace, ui.waifuArt, ui.chatBox,
 				assets.head, assets.happyHead, waifuName, currentBody)
 		}
 	})
 
-	ui.actionSpace.AddItem("Dress Up", "  Change her outfit.", rune(keys.DressUp[0]), func() {
+	ui.actionSpace.AddItem("Dress Up", "  Change the outfit.", rune(keys.DressUp[0]), func() {
 		if !utils.LockGridChanges {
 			utils.DressUp(ui.app, ui.grid, ui.actionSpace,ui.waifuArt, ui.chatBox,
 				assets.head, waifuName, currentBody)

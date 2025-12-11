@@ -6,7 +6,6 @@ Preview:
 ###### You can turn the avatar to **husbando** in `~/.config/cliwaifutamagotchi/settings.json`!
 ![Husbando](screenshots/husbando-preview.jpg)
 
-
 ![Repo size](https://img.shields.io/github/repo-size/HenryLoM/CliWaifuTamagotchi?color=lightgrey)
 ![Commits](https://img.shields.io/github/commit-activity/t/HenryLoM/CliWaifuTamagotchi/main?color=blue)
 ![Last commit](https://img.shields.io/github/last-commit/HenryLoM/CliWaifuTamagotchi?color=informational)
@@ -35,7 +34,7 @@ Preview:
 CliWaifuTamagotchi is a **terminal-based tamagotchi** that:
 
 - Renders **ASCII expressions and clothes**.
-- Provides a small set of **interactions**: Encourage, Dress Up, Background Mode, Quit.
+- Provides a small set of **interactions**: Encourage, Gift, Dress Up, Background Mode, Quit.
 - Uses a **persistent color palette** stored in `~/.config/cliwaifutamagotchi/palette.json`.
 - Uses **persistent detail settings** stored in `~/.config/cliwaifutamagotchi/settings.json`.
 - Customize some of the functions editing **`words-of-encouragement.txt` and `gifts.json`** in the same directory.
@@ -274,20 +273,23 @@ CliWaifuTamagotchi/
 #### **Warning:**
 * Missing/malformed ASCII files may cause a wrong output; handle carefully if modifying assets inside the structure.
 
-#### **Read, if you want to contribute:**
-* Project lives only because there are people who use it. Let's make sure we do it for people, not to recieve another achivement to out profiles.
+#### **Read if you want to contribute:**
+* The project lives only because there are people who use it. Let's make sure we build it for people, not to earn another achievement for our profiles.
 * Keep the code clean and constructive.
-* Two main goals of the project:
-  * As cusomizable TUI as we can get.
-  * As lightweight tool as we can create, since the project assumes users leave it on the background.
+* Keep the project PG.
+* Keep the Unix philosophy principle: a program should do one thing and do it well.
+* The two main goals of the project:
+  * A TUI that is as customizable as we can make it.
+  * A tool that is as lightweight as possible, since the project assumes users leave it running in the background.
 
-#### **Future plans:**
+#### **Future plans you can help with:**
 * More interactions (feeding, timed events, stats).
 * Save selected outfit and preferences.
 * Unit tests and error handling improvements.
-* Husbando version ("Swap Mode").
+* Custom separate font support (because a lot of people meet problems with visuals with their fonts).
 * Maybe "Pose Mode" - loop animation or specific pose to select and have on the background.
-* Maybe handle stderr so Waifu reacts to the errors you get during your work.
+* Maybe separate module handle stderr so Waifu reacts to the errors you get during your work.
+* Maybe separate module to use a ChatBot.
 
 ---
 

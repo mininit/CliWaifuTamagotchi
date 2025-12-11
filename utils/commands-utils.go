@@ -93,7 +93,7 @@ func GiftMenu(
 			// Show reaction
 			if UIEventsChan != nil {
 				UIEventsChan <- func() {
-					chatBox.SetText(waifuName + ": Aw, thank you for the " + gift.Name + " ♡")
+					chatBox.SetText(waifuName + ": Aw, thank you for the " + gift.Name + " ♥")
 
 					// Happy head + current body (same as Encourage)
 					waifuArt.SetText(happyHead + "\n" + *currentBody)
